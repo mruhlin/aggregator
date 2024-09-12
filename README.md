@@ -72,6 +72,12 @@ If any error occurs, the server will return a non-`200` error code along with a 
 
 Example: `{"status": "error", "message": "No readings found"}`
 
+## Development
+Development in this project is simple.  Most of the work is done by the `Aggregator` class in `lib/aggregator.rb` and the sinatra server in `server.rb`.  Developers who would like to contribute should start there.
+
+## Tests
+This project uses rspec.  Tests are stored in the `spec` directory.  Once the code is checked out, tests can be run via the `bundle exec rspec` command.  
+
 ## Design Decisions
 ### Sinatra vs. Rails
 I used Sinatra for this project because it's easier to get a bare-bones HTTP API up and running with less boilerplate.  For a more complex project, the investment to build a Rails app would probably pay off, but for a 2 hour project, a smaller deliverable is preferred.
@@ -92,6 +98,9 @@ The following points would be good to consider once this MVP is in production.
 
 ## Persistence
 We want the system to be fault-tolerant, so we should add a persistence layer.  Depending on future requirements we could store the data in a relational database, but the current use case lends itself to a redis server.  We could rewrite the app to use an in-memory Redis instance, then enable persistence on that instance easily enough.
+
+## CI/CD Pipelines
+No project should go to production without it.  We should add a CI/CD pipeline and prevent pull requests from merging unless all tests pass with 100% coverage.  Due to time constraints, the project has a representative set of tests and coverage is not considered.
 
 ## API Documentation
 Given more time, we should use OpenAPI to document the API endpoints instead of just a readme.

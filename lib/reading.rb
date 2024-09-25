@@ -1,4 +1,5 @@
 require 'date'
+require 'json'
 
 class Reading
   attr :timestamp
@@ -15,4 +16,18 @@ class Reading
     @timestamp = timestamp
     @count = count
   end
+
+  def as_json
+    {timestamp: @timestamp&.iso8601, count: @count}
+  end
+
+  def to_json
+    as_json.to_json
+  end
+
+  # json param is a hash
+  def self.from_json(json)
+    Reading.new(DateTime.parse(json['timestamp']), json['count'])
+  end
+
 end
